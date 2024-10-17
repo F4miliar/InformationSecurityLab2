@@ -19,6 +19,10 @@ namespace InformationSecurityLab2
         private double a;
         private double b;
         private double y;
+        private double t0;
+        private double t1;
+        private double T;
+        private double n = 10.0;
         private bool isEncripted = false;
 
         public Form1()
@@ -46,6 +50,9 @@ namespace InformationSecurityLab2
             a = (double)numericUpDownAlpha.Value;
             b = (double)numericUpDownBeta.Value;
             y = (double)numericUpDownGamma.Value;
+            t0 = (double)numericUpDownTStart.Value;
+            t1 = (double)numericUpDownTEnd.Value;
+            T = (double)numericUpDownInterval.Value;
         }
 
         private void RenderGraph()
@@ -54,7 +61,7 @@ namespace InformationSecurityLab2
 
             chart1.Series[0].Points.Clear();
 
-            for (double t = 1; t <= 10; t += 0.2)
+            for (double t = t0; t <= t1; t += T / 10.0)
             {
                 double X = Function(t);
                 chart1.Series[0].Points.Add(new DataPoint(t, X));
@@ -69,8 +76,28 @@ namespace InformationSecurityLab2
         private void Encrypt()
         {
             DataPoint[] array = chart1.Series[0].Points.ToArray();
-            int step = 2;
-            
+            chart1.Series[0].Points.Clear();
+            double t = T / n;
+            double i = t0;
+            double j = t0;
+
+            DataPoint[][] matrix;
+            int TSector = 0;
+            int tSector = 0;
+            foreach (DataPoint p in array)
+            {
+                if(p.XValue > i + t)
+                {
+                    i += t;
+                    tSector++;
+                }
+                if (p.XValue > j + T)
+                {
+                    j += T;
+                    TSector++;
+                }
+                //matrix[TSector][tSector] = p;
+            }
         }
 
         private void Decrypt()
@@ -81,9 +108,17 @@ namespace InformationSecurityLab2
         private void buttonEncrypt_Click(object sender, EventArgs e)
         {
             if (isEncripted)
+            {
                 Decrypt();
-            else 
+                isEncripted = false;
+                buttonEncrypt.Text = "Шифровать";
+            }
+            else
+            {
                 Encrypt();
+                isEncripted |= true;
+                buttonEncrypt.Text = "Расшифровать";
+            }
         }
 
         private void numericUpDownA_ValueChanged(object sender, EventArgs e)
@@ -112,6 +147,21 @@ namespace InformationSecurityLab2
         }
 
         private void numericUpDownGamma_ValueChanged(object sender, EventArgs e)
+        {
+            RenderGraph();
+        }
+
+        private void numericUpDownTStart_ValueChanged(object sender, EventArgs e)
+        {
+            RenderGraph();
+        }
+
+        private void numericUpDownTEnd_ValueChanged(object sender, EventArgs e)
+        {
+            RenderGraph();
+        }
+
+        private void numericUpDownInterval_ValueChanged(object sender, EventArgs e)
         {
             RenderGraph();
         }
