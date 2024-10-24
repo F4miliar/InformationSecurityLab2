@@ -81,22 +81,31 @@ namespace InformationSecurityLab2
             double i = t0;
             double j = t0;
 
-            DataPoint[][] matrix;
+            DataPoint[,] matrix = new DataPoint[(int)((t1 - t0) / T) , (int)n];//Переделать на списки
             int TSector = 0;
             int tSector = 0;
             foreach (DataPoint p in array)
             {
-                if(p.XValue > i + t)
+                if(p.XValue >= i + t)
                 {
                     i += t;
                     tSector++;
                 }
-                if (p.XValue > j + T)
+                if (p.XValue >= j + T)
                 {
                     j += T;
                     TSector++;
+                    tSector = 0;
                 }
-                //matrix[TSector][tSector] = p;
+                matrix[TSector , tSector] = p;
+            }
+
+            for (int ii = 0; ii < matrix.Length; ii++)
+            {
+                for (int jj = 0; jj < n; jj++)
+                {
+                    chart1.Series[0].Points.Add(matrix[ii, jj]);
+                }
             }
         }
 
