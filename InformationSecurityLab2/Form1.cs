@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -125,7 +126,7 @@ namespace InformationSecurityLab2
         {
             for (int i = 0; i < matrix.Count; i++)
             {
-                int pointer = i + 5;
+                int pointer = i + 1;
                 if (pointer >= matrix.Count)
                     pointer -= matrix.Count;
 
@@ -133,18 +134,19 @@ namespace InformationSecurityLab2
                 matrix[i] = matrix[pointer];
                 matrix[pointer] = temp;
             }
+            Random random = new Random();
             for (int i = 0; i < matrix.Count; i++)
             {
-                
+
                 for (int j = 0; j < matrix[i].Count - 1; j++)
                 {
-                    int pointer = j + 1;
+                    int pointer = j + 6;//random.Next(matrix[i].Count);
                     if (pointer >= matrix[i].Count)
                         pointer -= matrix[i].Count;
 
-                    double temp = matrix[i][j].XValue;
-                    matrix[i][j].XValue = matrix[i][pointer].XValue;
-                    matrix[i][pointer].XValue = temp;
+                    double[] temp = matrix[i][j].YValues;
+                    matrix[i][j].YValues = matrix[i][pointer].YValues;
+                    matrix[i][pointer].YValues = temp;
                 }
             }
 
