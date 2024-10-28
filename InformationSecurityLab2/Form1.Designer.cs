@@ -70,7 +70,7 @@
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(9, 10);
-            this.chart1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
@@ -94,7 +94,7 @@
             // numericUpDownA
             // 
             this.numericUpDownA.Location = new System.Drawing.Point(649, 10);
-            this.numericUpDownA.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownA.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownA.Minimum = new decimal(new int[] {
             100,
             0,
@@ -113,7 +113,7 @@
             // numericUpDownB
             // 
             this.numericUpDownB.Location = new System.Drawing.Point(649, 32);
-            this.numericUpDownB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownB.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownB.Minimum = new decimal(new int[] {
             100,
             0,
@@ -143,7 +143,7 @@
             // numericUpDownC
             // 
             this.numericUpDownC.Location = new System.Drawing.Point(649, 55);
-            this.numericUpDownC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownC.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownC.Minimum = new decimal(new int[] {
             100,
             0,
@@ -173,7 +173,7 @@
             // numericUpDownAlpha
             // 
             this.numericUpDownAlpha.Location = new System.Drawing.Point(649, 78);
-            this.numericUpDownAlpha.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownAlpha.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownAlpha.Minimum = new decimal(new int[] {
             1,
             0,
@@ -203,7 +203,7 @@
             // numericUpDownBeta
             // 
             this.numericUpDownBeta.Location = new System.Drawing.Point(649, 101);
-            this.numericUpDownBeta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownBeta.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownBeta.Minimum = new decimal(new int[] {
             1,
             0,
@@ -233,7 +233,7 @@
             // numericUpDownGamma
             // 
             this.numericUpDownGamma.Location = new System.Drawing.Point(649, 124);
-            this.numericUpDownGamma.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownGamma.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownGamma.Minimum = new decimal(new int[] {
             1,
             0,
@@ -264,7 +264,7 @@
             // 
             this.buttonEncrypt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonEncrypt.Location = new System.Drawing.Point(596, 316);
-            this.buttonEncrypt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonEncrypt.Margin = new System.Windows.Forms.Padding(2);
             this.buttonEncrypt.Name = "buttonEncrypt";
             this.buttonEncrypt.Size = new System.Drawing.Size(103, 40);
             this.buttonEncrypt.TabIndex = 13;
@@ -275,7 +275,7 @@
             // numericUpDownTStart
             // 
             this.numericUpDownTStart.Location = new System.Drawing.Point(649, 146);
-            this.numericUpDownTStart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownTStart.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownTStart.Name = "numericUpDownTStart";
             this.numericUpDownTStart.Size = new System.Drawing.Size(52, 20);
             this.numericUpDownTStart.TabIndex = 15;
@@ -300,7 +300,7 @@
             // numericUpDownTEnd
             // 
             this.numericUpDownTEnd.Location = new System.Drawing.Point(649, 169);
-            this.numericUpDownTEnd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownTEnd.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownTEnd.Minimum = new decimal(new int[] {
             1,
             0,
@@ -331,7 +331,7 @@
             // 
             this.numericUpDownInterval.DecimalPlaces = 1;
             this.numericUpDownInterval.Location = new System.Drawing.Point(649, 192);
-            this.numericUpDownInterval.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownInterval.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownInterval.Minimum = new decimal(new int[] {
             1,
             0,
@@ -383,10 +383,9 @@
             this.Controls.Add(this.numericUpDownA);
             this.Controls.Add(this.labelA);
             this.Controls.Add(this.chart1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownA)).EndInit();

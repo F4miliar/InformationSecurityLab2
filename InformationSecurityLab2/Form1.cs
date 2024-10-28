@@ -31,11 +31,6 @@ namespace InformationSecurityLab2
             chart1.Series[0].ChartType = SeriesChartType.Line;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
 
         private void Form1_Shown(object sender, EventArgs e)
         {
@@ -55,13 +50,29 @@ namespace InformationSecurityLab2
             T = (double)numericUpDownInterval.Value;
         }
 
+        private void buttonEncrypt_Click(object sender, EventArgs e)
+        {
+            if (isEncripted)
+            {
+                Decrypt();
+                isEncripted = false;
+                buttonEncrypt.Text = "Шифровать";
+            }
+            else
+            {
+                Encrypt();
+                isEncripted |= true;
+                buttonEncrypt.Text = "Расшифровать";
+            }
+        }
+
         private void RenderGraph()
         {
             UpdateValues();
 
             chart1.Series[0].Points.Clear();
 
-            for (double t = t0; t <= t1; t += T / 10.0)
+            for (double t = t0 + T / n; t <= t1; t += T / n)
             {
                 double X = Function(t);
                 chart1.Series[0].Points.Add(new DataPoint(t, X));
@@ -77,34 +88,76 @@ namespace InformationSecurityLab2
         {
             DataPoint[] array = chart1.Series[0].Points.ToArray();
             chart1.Series[0].Points.Clear();
+
+            List<List<DataPoint>> matrix = ArrayToListOfLists(array);
+            matrix = CeasarCipher(matrix);
+            ChartPointsAddition(matrix);
+        }
+
+        private List<List<DataPoint>> ArrayToListOfLists(DataPoint[] array)
+        {
             double t = T / n;
             double i = t0;
             double j = t0;
 
-            DataPoint[,] matrix = new DataPoint[(int)((t1 - t0) / T) , (int)n];//Переделать на списки
+            List<List<DataPoint>> matrix = new List<List<DataPoint>> { new List<DataPoint>() };
             int TSector = 0;
-            int tSector = 0;
+
             foreach (DataPoint p in array)
             {
-                if(p.XValue >= i + t)
+                if (p.XValue >= i + t)
                 {
                     i += t;
-                    tSector++;
                 }
                 if (p.XValue >= j + T)
                 {
                     j += T;
                     TSector++;
-                    tSector = 0;
+                    matrix.Add(new List<DataPoint>());
                 }
-                matrix[TSector , tSector] = p;
+                matrix.ElementAt(TSector).Add(p);
             }
 
-            for (int ii = 0; ii < matrix.Length; ii++)
+            return matrix;
+        }
+
+        private List<List<DataPoint>> CeasarCipher(List<List<DataPoint>> matrix)
+        {
+            for (int i = 0; i < matrix.Count; i++)
             {
-                for (int jj = 0; jj < n; jj++)
+                int pointer = i + 5;
+                if (pointer >= matrix.Count)
+                    pointer -= matrix.Count;
+
+                List<DataPoint> temp = matrix[i];
+                matrix[i] = matrix[pointer];
+                matrix[pointer] = temp;
+            }
+            for (int i = 0; i < matrix.Count; i++)
+            {
+                
+                for (int j = 0; j < matrix[i].Count - 1; j++)
                 {
-                    chart1.Series[0].Points.Add(matrix[ii, jj]);
+                    int pointer = j + 1;
+                    if (pointer >= matrix[i].Count)
+                        pointer -= matrix[i].Count;
+
+                    double temp = matrix[i][j].XValue;
+                    matrix[i][j].XValue = matrix[i][pointer].XValue;
+                    matrix[i][pointer].XValue = temp;
+                }
+            }
+
+            return matrix;
+        }
+
+        private void ChartPointsAddition(List<List<DataPoint>> matrix)
+        {
+            foreach (List<DataPoint> l in matrix)
+            {
+                foreach (DataPoint p in l)
+                {
+                    chart1.Series[0].Points.Add(p);
                 }
             }
         }
@@ -112,22 +165,6 @@ namespace InformationSecurityLab2
         private void Decrypt()
         {
 
-        }
-
-        private void buttonEncrypt_Click(object sender, EventArgs e)
-        {
-            if (isEncripted)
-            {
-                Decrypt();
-                isEncripted = false;
-                buttonEncrypt.Text = "Шифровать";
-            }
-            else
-            {
-                Encrypt();
-                isEncripted |= true;
-                buttonEncrypt.Text = "Расшифровать";
-            }
         }
 
         private void numericUpDownA_ValueChanged(object sender, EventArgs e)
