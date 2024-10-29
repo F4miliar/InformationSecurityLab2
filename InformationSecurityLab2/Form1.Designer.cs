@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.labelA = new System.Windows.Forms.Label();
             this.numericUpDownA = new System.Windows.Forms.NumericUpDown();
@@ -51,6 +51,10 @@
             this.labelTEnd = new System.Windows.Forms.Label();
             this.numericUpDownInterval = new System.Windows.Forms.NumericUpDown();
             this.labelInterval = new System.Windows.Forms.Label();
+            this.numericUpDownK = new System.Windows.Forms.NumericUpDown();
+            this.labelK = new System.Windows.Forms.Label();
+            this.numericUpDownn = new System.Windows.Forms.NumericUpDown();
+            this.labeln = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownB)).BeginInit();
@@ -61,21 +65,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownn)).BeginInit();
             this.SuspendLayout();
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
             this.chart1.Location = new System.Drawing.Point(9, 10);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart1.Series.Add(series3);
             this.chart1.Size = new System.Drawing.Size(582, 346);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -329,7 +335,6 @@
             // 
             // numericUpDownInterval
             // 
-            this.numericUpDownInterval.DecimalPlaces = 1;
             this.numericUpDownInterval.Location = new System.Drawing.Point(649, 192);
             this.numericUpDownInterval.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownInterval.Minimum = new decimal(new int[] {
@@ -358,11 +363,75 @@
             this.labelInterval.TabIndex = 18;
             this.labelInterval.Text = "T:";
             // 
+            // numericUpDownK
+            // 
+            this.numericUpDownK.Location = new System.Drawing.Point(649, 240);
+            this.numericUpDownK.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDownK.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numericUpDownK.Name = "numericUpDownK";
+            this.numericUpDownK.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDownK.TabIndex = 21;
+            this.numericUpDownK.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownK.ValueChanged += new System.EventHandler(this.numericUpDownK_ValueChanged);
+            // 
+            // labelK
+            // 
+            this.labelK.AutoSize = true;
+            this.labelK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelK.Location = new System.Drawing.Point(626, 239);
+            this.labelK.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelK.Name = "labelK";
+            this.labelK.Size = new System.Drawing.Size(21, 17);
+            this.labelK.TabIndex = 20;
+            this.labelK.Text = "K:";
+            // 
+            // numericUpDownn
+            // 
+            this.numericUpDownn.Location = new System.Drawing.Point(649, 216);
+            this.numericUpDownn.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDownn.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numericUpDownn.Name = "numericUpDownn";
+            this.numericUpDownn.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDownn.TabIndex = 23;
+            this.numericUpDownn.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDownn.ValueChanged += new System.EventHandler(this.numericUpDownn_ValueChanged);
+            // 
+            // labeln
+            // 
+            this.labeln.AutoSize = true;
+            this.labeln.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labeln.Location = new System.Drawing.Point(626, 215);
+            this.labeln.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labeln.Name = "labeln";
+            this.labeln.Size = new System.Drawing.Size(20, 17);
+            this.labeln.TabIndex = 22;
+            this.labeln.Text = "n:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(707, 367);
+            this.Controls.Add(this.numericUpDownn);
+            this.Controls.Add(this.labeln);
+            this.Controls.Add(this.numericUpDownK);
+            this.Controls.Add(this.labelK);
             this.Controls.Add(this.numericUpDownInterval);
             this.Controls.Add(this.labelInterval);
             this.Controls.Add(this.numericUpDownTEnd);
@@ -397,6 +466,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTEnd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -424,6 +495,10 @@
         private System.Windows.Forms.Label labelTEnd;
         private System.Windows.Forms.NumericUpDown numericUpDownInterval;
         private System.Windows.Forms.Label labelInterval;
+        private System.Windows.Forms.NumericUpDown numericUpDownK;
+        private System.Windows.Forms.Label labelK;
+        private System.Windows.Forms.NumericUpDown numericUpDownn;
+        private System.Windows.Forms.Label labeln;
     }
 }
 
