@@ -51,10 +51,10 @@
             this.labelTEnd = new System.Windows.Forms.Label();
             this.numericUpDownInterval = new System.Windows.Forms.NumericUpDown();
             this.labelInterval = new System.Windows.Forms.Label();
-            this.numericUpDownK = new System.Windows.Forms.NumericUpDown();
             this.labelK = new System.Windows.Forms.Label();
             this.numericUpDownn = new System.Windows.Forms.NumericUpDown();
             this.labeln = new System.Windows.Forms.Label();
+            this.textBoxK = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownB)).BeginInit();
@@ -65,7 +65,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownInterval)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownn)).BeginInit();
             this.SuspendLayout();
             // 
@@ -363,25 +362,6 @@
             this.labelInterval.TabIndex = 18;
             this.labelInterval.Text = "T:";
             // 
-            // numericUpDownK
-            // 
-            this.numericUpDownK.Location = new System.Drawing.Point(649, 240);
-            this.numericUpDownK.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDownK.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numericUpDownK.Name = "numericUpDownK";
-            this.numericUpDownK.Size = new System.Drawing.Size(52, 20);
-            this.numericUpDownK.TabIndex = 21;
-            this.numericUpDownK.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownK.ValueChanged += new System.EventHandler(this.numericUpDownK_ValueChanged);
-            // 
             // labelK
             // 
             this.labelK.AutoSize = true;
@@ -406,7 +386,7 @@
             this.numericUpDownn.Size = new System.Drawing.Size(52, 20);
             this.numericUpDownn.TabIndex = 23;
             this.numericUpDownn.Value = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -423,14 +403,23 @@
             this.labeln.TabIndex = 22;
             this.labeln.Text = "n:";
             // 
+            // textBoxK
+            // 
+            this.textBoxK.Location = new System.Drawing.Point(649, 242);
+            this.textBoxK.Name = "textBoxK";
+            this.textBoxK.Size = new System.Drawing.Size(52, 20);
+            this.textBoxK.TabIndex = 24;
+            this.textBoxK.Text = "12345";
+            this.textBoxK.Leave += new System.EventHandler(this.textBoxK_Leave);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(707, 367);
+            this.Controls.Add(this.textBoxK);
             this.Controls.Add(this.numericUpDownn);
             this.Controls.Add(this.labeln);
-            this.Controls.Add(this.numericUpDownK);
             this.Controls.Add(this.labelK);
             this.Controls.Add(this.numericUpDownInterval);
             this.Controls.Add(this.labelInterval);
@@ -466,7 +455,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTEnd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownInterval)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -495,10 +483,10 @@
         private System.Windows.Forms.Label labelTEnd;
         private System.Windows.Forms.NumericUpDown numericUpDownInterval;
         private System.Windows.Forms.Label labelInterval;
-        private System.Windows.Forms.NumericUpDown numericUpDownK;
         private System.Windows.Forms.Label labelK;
         private System.Windows.Forms.NumericUpDown numericUpDownn;
         private System.Windows.Forms.Label labeln;
+        private System.Windows.Forms.TextBox textBoxK;
     }
 }
 

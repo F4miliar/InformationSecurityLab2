@@ -23,7 +23,7 @@ namespace InformationSecurityLab2
         private double t0;
         private double t1;
         private double T;
-        private int K;
+        private string K;
         private int n;
         private bool isEncripted = false;
 
@@ -35,7 +35,6 @@ namespace InformationSecurityLab2
 
         private void UpdateValues()
         {
-
             A = (double)numericUpDownA.Value;
             B = (double)numericUpDownB.Value;
             C = (double)numericUpDownC.Value;
@@ -45,11 +44,8 @@ namespace InformationSecurityLab2
             t0 = (double)numericUpDownTStart.Value;
             t1 = (double)numericUpDownTEnd.Value;
             T = (int)numericUpDownInterval.Value;
-            K = (int)numericUpDownK.Value;
+            K = textBoxK.Text;
             n = (int)numericUpDownn.Value;
-
-            numericUpDownTStart.Maximum = numericUpDownTEnd.Value - 1;
-            numericUpDownK.Maximum = numericUpDownn.Value;
         }
 
         private void buttonEncrypt_Click(object sender, EventArgs e)
@@ -70,45 +66,76 @@ namespace InformationSecurityLab2
 
         private void Encrypt()
         {
-            UpdateGraphWithCryptoKey(K);
+            UpdateGraphWithCryptoKey();
         }
 
         private void Decrypt()
         {
-            UpdateGraphWithCryptoKey(n - 1 - K);
+            UpdateGraphWithCryptoKey();
         }
 
-        private void UpdateGraphWithCryptoKey(int k)
+        private void UpdateGraphWithCryptoKey()
         {
             DataPoint[] array = chart1.Series[0].Points.ToArray();
             chart1.Series[0].Points.Clear();
 
             List<List<DataPoint>> matrix = ArrayToListOfLists(array);
-            matrix = CeasarCipher(matrix, k);
+            if (isEncripted)
+            {
+                matrix = Reverce(matrix);
+            }
+            else
+            {
+                matrix = Replace(matrix);
+            }
             ChartPointsAddition(matrix);
         }
 
-        private List<List<DataPoint>> CeasarCipher(List<List<DataPoint>> matrix, int offset)
+        private List<List<DataPoint>> Replace(List<List<DataPoint>> matrix)
         {
-            for (int o = 0 ; o < offset; o++)
+            K = textBoxK.Text;
+            for (int i = 0; i < matrix.Count; i++)
             {
-                for (int i = 0; i < matrix.Count; i++)
+                if (matrix[i].Count != K.Length) continue;
+                List<DataPoint> dp = Copy(matrix[i]);
+                for (int j = 0; j < matrix[i].Count; j++)
                 {
-                    for (int j = 0; j < matrix[i].Count - 2; j++)
-                    {
-                        int pointer = j + 1;
-                        if (pointer >= matrix[i].Count)
-                            pointer -= matrix[i].Count;
-                        else if (pointer < 0)
-                            pointer += matrix[i].Count;
-
-                        double[] temp = matrix[i][j].YValues;
-                        matrix[i][j].YValues = matrix[i][pointer].YValues;
-                        matrix[i][pointer].YValues = temp;
-                    }
+                    int index = int.Parse(K[j].ToString()) - 1;
+                    dp[j].YValues = matrix[i][index].YValues;
                 }
+                matrix[i] = dp;
             }
             return matrix;
+        }
+
+        private List<List<DataPoint>> Reverce(List<List<DataPoint>> matrix)
+        {
+            K = textBoxK.Text;
+            for (int i = 0; i < matrix.Count; i++)
+            {
+                if (matrix[i].Count != K.Length) continue;
+                List<DataPoint> dp = Copy(matrix[i]);
+                for (int j = 0; j < matrix[i].Count; j++)
+                {
+                    int index = int.Parse(K[j].ToString()) - 1;
+                    dp[index].YValues = matrix[i][j].YValues;
+                }
+                matrix[i] = dp;
+            }
+            return matrix;
+        }
+
+        private static List<DataPoint> Copy(List<DataPoint> matrix)
+        {
+            List<DataPoint> dp = new List<DataPoint>();
+            foreach (DataPoint p in matrix)
+            {
+                DataPoint pn = new DataPoint();
+                pn.SetValueXY(p.XValue, p.YValues);
+                dp.Add(pn);
+            }
+
+            return dp;
         }
 
         private List<List<DataPoint>> ArrayToListOfLists(DataPoint[] array)
@@ -216,11 +243,6 @@ namespace InformationSecurityLab2
             RenderGraph();
         }
 
-        private void numericUpDownK_ValueChanged(object sender, EventArgs e)
-        {
-            RenderGraph();
-        }
-
         private void numericUpDownn_ValueChanged(object sender, EventArgs e)
         {
             RenderGraph();
@@ -229,6 +251,15 @@ namespace InformationSecurityLab2
         private void button1_Click(object sender, EventArgs e)
         {
             RenderGraph();
+        }
+
+        private void textBoxK_Leave(object sender, EventArgs e)
+        {
+            if (textBoxK.Text.Length != 5 || !textBoxK.Text.Contains("1"))
+            {
+                textBoxK.Text = "12345";
+                RenderGraph();
+            }
         }
     }
 }
